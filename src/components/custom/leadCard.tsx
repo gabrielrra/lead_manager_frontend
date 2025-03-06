@@ -19,20 +19,16 @@ export interface LeadProps {
 export function LeadCard(props: LeadProps) {
   const { name, location, category, description, createdAt, jobId } =
     props.lead;
-  const avatarFallback = name
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .toLocaleUpperCase();
+  const avatarFallback = name.split(" ")[0].toLocaleUpperCase();
   return (
     <Card className="w-full">
       <CardHeader>
         <div className="flex items-center space-x-4">
           <Avatar className="h-12 w-12">
-            <AvatarImage
+            {/* <AvatarImage
               src="/placeholder.svg?height=48&width=48"
               alt="User avatar"
-            />
+            /> */}
             <AvatarFallback className="bg-slate-300 dark:bg-slate-500">
               {avatarFallback}
             </AvatarFallback>
