@@ -14,12 +14,36 @@ import { Lead } from "@/types/lead";
 
 export interface LeadProps {
   lead: Lead;
+  isInvited?: boolean;
+  onAccept?: (leadId: number) => void;
+  onReject?: (leadId: number) => void;
 }
 
 export function LeadCard(props: LeadProps) {
-  const { name, location, category, description, createdAt, jobId } =
+  const { id, name, location, category, description, createdAt, jobId } =
     props.lead;
-  const avatarFallback = name.split(" ")[0].toLocaleUpperCase();
+  let { onAccept, onReject, isInvited = true } = props;
+
+  if (isInvited && !onAccept) {
+    throw new Error("onAccept is required when isInvited is true");
+  }
+
+  const currentYear = new Date().getFullYear();
+  const leadDate = new Date(createdAt);
+  const createdAtStr = leadDate
+    .toLocaleDateString(["pt-BR", "en-US"], {
+      year: leadDate.getFullYear() === currentYear ? undefined : "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .concat(
+      " @ ",
+      leadDate.toLocaleTimeString(["pt-BR", "en-US"], {
+        hour: "numeric",
+        minute: "numeric",
+      }),
+    );
+  const avatarFallback = name?.split(" ")[0][0].toLocaleUpperCase() || "?";
   return (
     <Card className="w-full">
       <CardHeader>
@@ -35,7 +59,7 @@ export function LeadCard(props: LeadProps) {
           </Avatar>
           <div className="space-y-1">
             <CardTitle>{name}</CardTitle>
-            <CardDescription>{createdAt}</CardDescription>
+            <CardDescription>{createdAtStr}</CardDescription>
           </div>
         </div>
         <div className="flex items-center space-x-4">
@@ -56,11 +80,19 @@ export function LeadCard(props: LeadProps) {
       <CardContent>
         <p className="text-sm">{description}</p>
       </CardContent>
-      <Separator />
-      <CardFooter className="flex flex-row space-x-2">
-        <Button variant="default">Accept</Button>
-        <Button variant="outline">Decline</Button>
-      </CardFooter>
+      {isInvited && (
+        <>
+          <Separator />
+          <CardFooter className="flex flex-row space-x-2">
+            <Button variant="default" onClick={() => onAccept!(id)}>
+              Accept
+            </Button>
+            <Button variant="outline" onClick={() => onReject!(id)}>
+              Decline
+            </Button>
+          </CardFooter>
+        </>
+      )}
     </Card>
   );
 }

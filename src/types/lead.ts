@@ -1,3 +1,22 @@
+// public enum LeadStatus
+// {
+//     Invited,
+//     Accepted,
+//     Rejected
+// }
+
+export enum LeadStatus {
+  INVITED,
+  ACCEPTED,
+  REJECTED
+}
+
+export const LeadStatusLabels = {
+  [LeadStatus.INVITED]: "Invited",
+  [LeadStatus.ACCEPTED]: "Accepted",
+  [LeadStatus.REJECTED]: "Rejected",
+};
+
 export interface Lead {
   id: number;
   name: string;
@@ -7,5 +26,5 @@ export interface Lead {
   createdAt: string;
   jobId: string;
   price?: number;
+  status: number;
 }
-// { "id": 1, "name": "John Doe", "location": "New York", "category": "Plumbing", "description": "Bathroom remodeling project", "createdAt": "2025-03-06T11:16:16.5646315", "jobId": "JOB-2023-001", "price": 2500; }
