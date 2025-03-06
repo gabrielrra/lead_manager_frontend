@@ -6,7 +6,8 @@
     "dev": "vite --port 3000",
     "build": "vite build && tsc --noEmit",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "debug": "vite --port 3000 --debug"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.3",
@@ -17,6 +18,7 @@
     "@radix-ui/react-tabs": "^1.1.3",
     "@tailwindcss/postcss": "^4.0.10",
     "@tailwindcss/vite": "^4.0.10",
+    "@tanstack/react-query": "^5.67.1",
     "@tanstack/react-router": "^1.112.13",
     "@tanstack/router-devtools": "^1.112.13",
     "@tanstack/router-plugin": "^1.112.13",
@@ -40,7 +42,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript": "^5.7.2",
-    "vite": "^6.1.0"
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
   }
 }

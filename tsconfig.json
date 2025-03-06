@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ESNext",
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "lib": [
@@ -14,6 +17,10 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": [
+      "node",
+      "vite/client"
+    ],
   }
 }
